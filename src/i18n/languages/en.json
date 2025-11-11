@@ -1,0 +1,22 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Welcome to Our App",
+    "subtitle": "Professional multilingual Next.js application",
+    "description": "This is a demo of i18n implementation with NextJS 15+."
+  },
+  "about": {
+    "title": "About Us",
+    "content": "We are a professional development team."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "content": "Get in touch with us."
+  }
+}

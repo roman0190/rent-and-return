@@ -1,0 +1,22 @@
+{
+  "common": {
+    "welcome": "स्वागत है",
+    "home": "होम",
+    "about": "के बारे में",
+    "contact": "संपर्क",
+    "language": "भाषा"
+  },
+  "home": {
+    "title": "हमारे ऐप में आपका स्वागत है",
+    "subtitle": "पेशेवर बहुभाषी Next.js एप्लिकेशन",
+    "description": "यह NextJS 15+ के साथ i18n implementation का डेमो है।"
+  },
+  "about": {
+    "title": "हमारे बारे में",
+    "content": "हम एक पेशेवर डेवलपमेंट टीम हैं।"
+  },
+  "contact": {
+    "title": "संपर्क करें",
+    "content": "हमसे संपर्क करें।"
+  }
+}
