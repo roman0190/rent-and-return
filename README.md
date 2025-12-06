@@ -5,7 +5,7 @@ A modern rental marketplace web app built with Next.js, TypeScript, shadcn/ui, a
 
 ## Preview
 
-[Live Demo](https://rent-return-demo.vercel.app) (Replace with your actual deployed URL)
+[Live Demo](https://rent-return-demo.vercel.app)
 
 ## Features
 - Browse, search, and filter rental items
