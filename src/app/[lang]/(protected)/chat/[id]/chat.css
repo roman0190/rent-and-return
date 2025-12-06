@@ -1,0 +1,31 @@
+.messages-container::-webkit-scrollbar {
+  width: 4px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.messages-container:hover::-webkit-scrollbar {
+  opacity: 1;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 2px;
+}
+
+.messages-container::-webkit-scrollbar-thumb:hover {
+  background: #9ca3af;
+}
+
+.messages-container {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(209, 213, 219, 0) transparent;
+}
+
+.messages-container:hover {
+  scrollbar-color: #d1d5db transparent;
+}
