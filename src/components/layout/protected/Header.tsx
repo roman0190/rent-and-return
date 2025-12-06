@@ -35,9 +35,9 @@ export default function Header() {
               alt="Rent & Return Logo"
               width={1080}
               height={1080}
-              className="w-40"
+              className="min-w-52 max-w-52"
             />
-            <div className="text-[0.5rem] text-grey-500 mt-1 font-bold">
+            <div className="text-[0.70rem] text-grey-500 mt-1 font-bold">
               Your trusted rental platform
             </div>
           </Link>
