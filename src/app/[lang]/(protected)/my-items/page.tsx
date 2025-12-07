@@ -16,19 +16,22 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { useTranslations } from "next-intl";
 
 export default function MyItemsPage() {
+  const t = useTranslations("myItems");
+
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="mb-2 text-2xl font-bold">My Items</h1>
-          <p className="text-gray-600">Manage your listed items</p>
+          <h1 className="mb-2 text-2xl font-bold">{t("title")}</h1>
+          <p className="text-gray-600">{t("subtitle")}</p>
         </div>
         <Link href="/items/add">
           <Button>
             <PlusCircle className="size-4 mr-2" />
-            Add Item
+            {t("addItem")}
           </Button>
         </Link>
       </div>
@@ -47,7 +50,7 @@ export default function MyItemsPage() {
                 className="absolute top-2 left-2"
                 variant={item.available ? "default" : "secondary"}
               >
-                {item.available ? "Available" : "Unavailable"}
+                {item.available ? t("available") : t("unavailable")}
               </Badge>
             </div>
             <CardContent className="p-4">
@@ -57,8 +60,12 @@ export default function MyItemsPage() {
               </p>
               <div className="flex items-center gap-2 text-xs sm:text-sm text-gray-600 mb-3">
                 <span>{item.condition}</span>
-                <span>• {item.views ?? 0} views</span>
-                <span>• {item.rentals ?? 0} rentals</span>
+                <span>
+                  • {item.views ?? 0} {t("views")}
+                </span>
+                <span>
+                  • {item.rentals ?? 0} {t("rentals")}
+                </span>
               </div>
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-1">
@@ -83,13 +90,13 @@ export default function MyItemsPage() {
                 <Button variant="outline" size="sm" className="flex-1" asChild>
                   <Link href={`/items/${item.id}`}>
                     <Eye className="size-4 mr-2" />
-                    View
+                    {t("view")}
                   </Link>
                 </Button>
                 <Button variant="outline" size="sm" className="flex-1" asChild>
-                  <Link href={`/items/edit/${item.id}`}>
+                  <Link href={`/my-items/edit/${item.id}`}>
                     <Edit className="size-4 mr-2" />
-                    Edit
+                    {t("edit")}
                   </Link>
                 </Button>
                 <AlertDialog>
@@ -100,21 +107,20 @@ export default function MyItemsPage() {
                       className="flex-1 text-red-600 hover:text-red-700"
                     >
                       <Trash2 className="size-4 mr-2" />
-                      Delete
+                      {t("delete")}
                     </Button>
                   </AlertDialogTrigger>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>Delete Item?</AlertDialogTitle>
+                      <AlertDialogTitle>{t("deleteItem")}</AlertDialogTitle>
                       <AlertDialogDescription>
-                        Are you sure you want to delete this item? This action
-                        cannot be undone.
+                        {t("deleteConfirmation")}
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
                       <AlertDialogAction className="bg-red-600 hover:bg-red-700">
-                        Delete
+                        {t("delete")}
                       </AlertDialogAction>
                     </AlertDialogFooter>
                   </AlertDialogContent>

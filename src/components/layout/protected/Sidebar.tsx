@@ -3,20 +3,24 @@ import { Badge } from "@/components/ui/badge";
 import { useAuth } from "@/context/AuthContext";
 import { useSidebar } from "@/context/SiderbarContext";
 import {
-  Home,
-  ListChecks,
+  Wrench,
+  Settings,
   MessageSquare,
   Package,
-  PlusCircle,
-  Settings,
+  Plus,
+  Hammer,
   Shield,
-  User,
-  CreditCard,
+  Users,
+  Wallet,
+  LayoutGrid,
+  Boxes,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 const Sidebar = () => {
+  const t = useTranslations("navigation");
   //they must be inside Sidebarcontext
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   //inside Auth Context
@@ -25,21 +29,21 @@ const Sidebar = () => {
   const pathname = usePathname();
 
   const navigation = [
-    { name: "Home", href: "/home", icon: Home },
-    { name: "Browse Items", href: "/items", icon: Package },
-    { name: "Add Item", href: "/items/add-item", icon: PlusCircle },
-    { name: "My Items", href: "/my-items", icon: ListChecks },
-    { name: "My Rentals", href: "/my-rentals", icon: ListChecks },
-    { name: "Messages", href: "/chat", icon: MessageSquare },
-    { name: "Payment History", href: "/payment-history", icon: CreditCard },
-    { name: "Profile", href: "/profile/1", icon: User },
-    { name: "Settings", href: "/settings", icon: Settings },
+    { name: t("home"), href: "/home", icon: LayoutGrid },
+    { name: t("browseItems"), href: "/items", icon: Package },
+    { name: t("addItem"), href: "/items/add-item", icon: Plus },
+    { name: t("myItems"), href: "/my-items", icon: Boxes },
+    { name: t("myRentals"), href: "/my-rentals", icon: Hammer },
+    { name: t("messages"), href: "/chat", icon: MessageSquare },
+    { name: t("paymentHistory"), href: "/payment-history", icon: Wallet },
+    { name: t("profile"), href: "/profile/1", icon: Users },
+    { name: t("settings"), href: "/settings", icon: Settings },
   ];
 
   const adminNavigation = [
-    { name: "Admin Dashboard", href: "/admin", icon: Shield },
-    { name: "User Management", href: "/admin/users", icon: User },
-    { name: "Item Management", href: "/admin/items", icon: Package },
+    { name: t("adminDashboard"), href: "/admin", icon: Shield },
+    { name: t("userManagement"), href: "/admin/users", icon: Wrench },
+    { name: t("itemManagement"), href: "/admin/items", icon: Package },
   ];
 
   return (
@@ -59,17 +63,17 @@ const Sidebar = () => {
                 href={item.href}
                 onClick={() => setIsSidebarOpen(false)}
                 className={`
-                    flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
+                    flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200
                     ${
                       isActive
-                        ? "bg-indigo-50 text-indigo-600"
-                        : "text-gray-700 hover:bg-gray-100"
+                        ? "bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-md"
+                        : "text-gray-600 hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-200 hover:text-gray-900"
                     }
                   `}
               >
                 <item.icon className="size-5" />
                 <span>{item.name}</span>
-                {item.name === "Messages" && (
+                {item.name === t("messages") && (
                   <Badge variant="secondary" className="ml-auto">
                     3
                   </Badge>
@@ -89,11 +93,11 @@ const Sidebar = () => {
                       href={item.href}
                       onClick={() => setIsSidebarOpen(false)}
                       className={`
-                          flex items-center gap-3 px-3 py-2 rounded-lg transition-colors
+                          flex items-center gap-3 px-3 py-2 rounded-lg transition-all duration-200
                           ${
                             isActive
-                              ? "bg-indigo-50 text-indigo-600"
-                              : "text-gray-700 hover:bg-gray-100"
+                              ? "bg-gradient-to-r from-gray-800 to-gray-900 text-white shadow-md"
+                              : "text-gray-600 hover:bg-gradient-to-r hover:from-gray-100 hover:to-gray-200 hover:text-gray-900"
                           }
                         `}
                     >

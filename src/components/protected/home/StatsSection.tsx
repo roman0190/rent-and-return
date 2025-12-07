@@ -1,29 +1,31 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Package, Star, TrendingUp, Users } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const StatsSection = () => {
+  const t = useTranslations("common");
   const statsMeta = [
     {
       key: "activeItems",
-      label: "Active Items",
+      label: t("activeItems"),
       icon: Package,
       color: "bg-blue-100 text-blue-600",
     },
     {
       key: "totalUsers",
-      label: "Total Users",
+      label: t("totalUsers"),
       icon: Users,
       color: "bg-green-100 text-green-600",
     },
     {
       key: "rentalsToday",
-      label: "Rentals Today",
+      label: t("rentalsToday"),
       icon: TrendingUp,
       color: "bg-purple-100 text-purple-600",
     },
     {
       key: "avgRating",
-      label: "Avg Rating",
+      label: t("avgRating"),
       icon: Star,
       color: "bg-yellow-100 text-yellow-600",
     },

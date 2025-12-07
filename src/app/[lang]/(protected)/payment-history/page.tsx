@@ -24,6 +24,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useTranslations } from "next-intl";
 
 const paymentHistory = [
   {
@@ -97,6 +98,7 @@ const paymentHistory = [
 ];
 
 export default function PaymentHistoryPage() {
+  const t = useTranslations("paymentHistory");
   const [searchQuery, setSearchQuery] = useState("");
   const [filterMethod, setFilterMethod] = useState("all");
   const [filterStatus, setFilterStatus] = useState("all");
@@ -177,12 +179,12 @@ export default function PaymentHistoryPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="mb-2">Payment History</h1>
-          <p className="text-gray-600">View all your transactions</p>
+          <h1 className="mb-2">{t("title")}</h1>
+          <p className="text-gray-600">{t("subtitle")}</p>
         </div>
         <Button variant="outline" onClick={handleExport}>
           <Download className="size-4 mr-2" />
-          Export
+          {t("export")}
         </Button>
       </div>
 
@@ -192,7 +194,7 @@ export default function PaymentHistoryPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Paid</p>
+                <p className="text-sm text-gray-600 mb-1">{t("totalPaid")}</p>
                 <p className="text-indigo-600">৳{totalPaid}</p>
               </div>
               <div className="p-3 bg-indigo-50 rounded-lg">
@@ -206,7 +208,9 @@ export default function PaymentHistoryPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Received</p>
+                <p className="text-sm text-gray-600 mb-1">
+                  {t("totalReceived")}
+                </p>
                 <p className="text-green-600">৳{totalReceived}</p>
               </div>
               <div className="p-3 bg-green-50 rounded-lg">
@@ -220,7 +224,9 @@ export default function PaymentHistoryPage() {
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-sm text-gray-600 mb-1">Total Transactions</p>
+                <p className="text-sm text-gray-600 mb-1">
+                  {t("totalTransactions")}
+                </p>
                 <p>{paymentHistory.length}</p>
               </div>
               <div className="p-3 bg-gray-50 rounded-lg">
@@ -239,7 +245,7 @@ export default function PaymentHistoryPage() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-gray-400" />
               <Input
                 type="text"
-                placeholder="Search by item name or transaction ID..."
+                placeholder={t("searchPlaceholder")}
                 className="pl-10"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -247,25 +253,25 @@ export default function PaymentHistoryPage() {
             </div>
             <Select value={filterMethod} onValueChange={setFilterMethod}>
               <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="Payment Method" />
+                <SelectValue placeholder={t("paymentMethod")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Methods</SelectItem>
-                <SelectItem value="cash">Cash</SelectItem>
-                <SelectItem value="bkash">bKash</SelectItem>
-                <SelectItem value="nagad">Nagad</SelectItem>
-                <SelectItem value="rocket">Rocket</SelectItem>
+                <SelectItem value="all">{t("allMethods")}</SelectItem>
+                <SelectItem value="cash">{t("cash")}</SelectItem>
+                <SelectItem value="bkash">{t("bkash")}</SelectItem>
+                <SelectItem value="nagad">{t("nagad")}</SelectItem>
+                <SelectItem value="rocket">{t("rocket")}</SelectItem>
               </SelectContent>
             </Select>
             <Select value={filterStatus} onValueChange={setFilterStatus}>
               <SelectTrigger className="w-full sm:w-48">
-                <SelectValue placeholder="Status" />
+                <SelectValue placeholder={t("status")} />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="all">All Status</SelectItem>
-                <SelectItem value="completed">Completed</SelectItem>
-                <SelectItem value="pending">Pending</SelectItem>
-                <SelectItem value="failed">Failed</SelectItem>
+                <SelectItem value="all">{t("allStatus")}</SelectItem>
+                <SelectItem value="completed">{t("completed")}</SelectItem>
+                <SelectItem value="pending">{t("pending")}</SelectItem>
+                <SelectItem value="failed">{t("failed")}</SelectItem>
               </SelectContent>
             </Select>
           </div>
@@ -275,9 +281,9 @@ export default function PaymentHistoryPage() {
       {/* Transactions List */}
       <Tabs value={activeTab} onValueChange={setActiveTab}>
         <TabsList className="grid w-full max-w-md grid-cols-3">
-          <TabsTrigger value="all">All</TabsTrigger>
-          <TabsTrigger value="payment">Paid</TabsTrigger>
-          <TabsTrigger value="received">Received</TabsTrigger>
+          <TabsTrigger value="all">{t("all")}</TabsTrigger>
+          <TabsTrigger value="payment">{t("paid")}</TabsTrigger>
+          <TabsTrigger value="received">{t("received")}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="all" className="space-y-4 mt-6">
@@ -287,9 +293,9 @@ export default function PaymentHistoryPage() {
                 <div className="p-4 bg-gray-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <CreditCard className="size-8 text-gray-400" />
                 </div>
-                <h3 className="mb-2">No Transactions Found</h3>
+                <h3 className="mb-2">{t("noTransactionsFound")}</h3>
                 <p className="text-gray-600 text-sm">
-                  Try adjusting your filters or search query
+                  {t("noTransactionsMessage")}
                 </p>
               </CardContent>
             </Card>
@@ -360,7 +366,7 @@ export default function PaymentHistoryPage() {
                       </div>
                       {payment.transactionId && (
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span>Transaction ID:</span>
+                          <span>{t("transactionId")}</span>
                           <span className="font-mono">
                             {payment.transactionId}
                           </span>
@@ -381,9 +387,9 @@ export default function PaymentHistoryPage() {
                 <div className="p-4 bg-gray-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <CreditCard className="size-8 text-gray-400" />
                 </div>
-                <h3 className="mb-2">No Transactions Found</h3>
+                <h3 className="mb-2">{t("noTransactionsFound")}</h3>
                 <p className="text-gray-600 text-sm">
-                  Try adjusting your filters or search query
+                  {t("noTransactionsMessage")}
                 </p>
               </CardContent>
             </Card>
@@ -454,7 +460,7 @@ export default function PaymentHistoryPage() {
                       </div>
                       {payment.transactionId && (
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span>Transaction ID:</span>
+                          <span>{t("transactionId")}</span>
                           <span className="font-mono">
                             {payment.transactionId}
                           </span>
@@ -475,9 +481,9 @@ export default function PaymentHistoryPage() {
                 <div className="p-4 bg-gray-100 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center">
                   <CreditCard className="size-8 text-gray-400" />
                 </div>
-                <h3 className="mb-2">No Transactions Found</h3>
+                <h3 className="mb-2">{t("noTransactionsFound")}</h3>
                 <p className="text-gray-600 text-sm">
-                  Try adjusting your filters or search query
+                  {t("noTransactionsMessage")}
                 </p>
               </CardContent>
             </Card>
@@ -548,7 +554,7 @@ export default function PaymentHistoryPage() {
                       </div>
                       {payment.transactionId && (
                         <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <span>Transaction ID:</span>
+                          <span>{t("transactionId")}</span>
                           <span className="font-mono">
                             {payment.transactionId}
                           </span>

@@ -25,9 +25,10 @@ import { useEffect, useState } from "react";
 import { useLocation } from "@/hooks/useLocation";
 import { LocationMapPicker } from "@/components/shared/LocationMapPicker";
 import toast from "react-hot-toast";
-
+import { useTranslations } from "next-intl";
 
 export default function ItemAddPage() {
+  const t = useTranslations("items.addItem");
   const navigate = useRouter();
   const [formData, setFormData] = useState({
     name: "",
@@ -63,7 +64,7 @@ export default function ItemAddPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!location) {
-      toast.error("Please select a location on the map");
+      toast.error(t("selectLocationError"));
       return;
     }
 
@@ -78,7 +79,7 @@ export default function ItemAddPage() {
     };
 
     console.log("Item data to be sent to backend:", itemData);
-    toast.success("Item listed successfully!");
+    toast.success(t("itemListedSuccess"));
     navigate.push("/my-items");
   };
 
@@ -93,8 +94,8 @@ export default function ItemAddPage() {
   return (
     <div className="max-w-3xl mx-auto space-y-6">
       <div>
-        <h1 className="mb-2">Add New Item</h1>
-        <p className="text-gray-600">List your item for rent</p>
+        <h1 className="mb-2">{t("title")}</h1>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       <form onSubmit={handleSubmit}>
@@ -102,7 +103,7 @@ export default function ItemAddPage() {
           <CardContent className="p-6 space-y-6">
             {/* Images */}
             <div className="space-y-2">
-              <Label>Item Images</Label>
+              <Label>{t("itemImages")}</Label>
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 {images.map((image, index) => (
                   <div
@@ -111,7 +112,7 @@ export default function ItemAddPage() {
                   >
                     <img
                       src={image}
-                      alt={`Upload ${index + 1}`}
+                      alt={`${t("upload")} ${index + 1}`}
                       className="size-full object-cover"
                     />
                     <button
@@ -131,7 +132,7 @@ export default function ItemAddPage() {
                   className="aspect-square rounded-lg border-2 border-dashed border-gray-300 hover:border-indigo-500 flex flex-col items-center justify-center gap-2 text-gray-500 hover:text-indigo-600 transition-colors"
                 >
                   <Upload className="size-6" />
-                  <span className="text-sm">Upload</span>
+                  <span className="text-sm">{t("upload")}</span>
                 </button>
               </div>
             </div>
@@ -139,10 +140,10 @@ export default function ItemAddPage() {
             {/* Basic Info */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="name">Item Name *</Label>
+                <Label htmlFor="name">{t("itemName")} *</Label>
                 <Input
                   id="name"
-                  placeholder="e.g., Professional Camera Kit"
+                  placeholder={t("itemNamePlaceholder")}
                   value={formData.name}
                   onChange={(e) =>
                     setFormData({ ...formData, name: e.target.value })
@@ -151,7 +152,7 @@ export default function ItemAddPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="category">Category *</Label>
+                <Label htmlFor="category">{t("category")} *</Label>
                 <Select
                   value={formData.category}
                   onValueChange={(value) =>
@@ -160,14 +161,24 @@ export default function ItemAddPage() {
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select category" />
+                    <SelectValue placeholder={t("selectCategory")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Electronics">Electronics</SelectItem>
-                    <SelectItem value="Tools">Tools</SelectItem>
-                    <SelectItem value="Outdoor">Outdoor</SelectItem>
-                    <SelectItem value="Music">Music</SelectItem>
-                    <SelectItem value="Sports">Sports</SelectItem>
+                    <SelectItem value="Electronics">
+                      {t("categories.electronics")}
+                    </SelectItem>
+                    <SelectItem value="Tools">
+                      {t("categories.tools")}
+                    </SelectItem>
+                    <SelectItem value="Outdoor">
+                      {t("categories.outdoor")}
+                    </SelectItem>
+                    <SelectItem value="Music">
+                      {t("categories.music")}
+                    </SelectItem>
+                    <SelectItem value="Sports">
+                      {t("categories.sports")}
+                    </SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -176,11 +187,11 @@ export default function ItemAddPage() {
             {/* Price & Condition */}
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <Label htmlFor="price">Price (Tk) *</Label>
+                <Label htmlFor="price">{t("price")} *</Label>
                 <Input
                   id="price"
                   type="number"
-                  placeholder="45"
+                  placeholder={t("pricePlaceholder")}
                   value={formData.price}
                   onChange={(e) =>
                     setFormData({ ...formData, price: e.target.value })
@@ -189,7 +200,7 @@ export default function ItemAddPage() {
                 />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="priceUnit">Price Unit *</Label>
+                <Label htmlFor="priceUnit">{t("priceUnit")} *</Label>
                 <Select
                   value={formData.priceUnit}
                   onValueChange={(value) =>
@@ -197,18 +208,20 @@ export default function ItemAddPage() {
                   }
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select unit" />
+                    <SelectValue placeholder={t("selectUnit")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="day">Per Day</SelectItem>
-                    <SelectItem value="week">Per Week</SelectItem>
-                    <SelectItem value="month">Per Month</SelectItem>
-                    <SelectItem value="year">Per Year</SelectItem>
+                    <SelectItem value="day">{t("priceUnits.day")}</SelectItem>
+                    <SelectItem value="week">{t("priceUnits.week")}</SelectItem>
+                    <SelectItem value="month">
+                      {t("priceUnits.month")}
+                    </SelectItem>
+                    <SelectItem value="year">{t("priceUnits.year")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
               <div className="space-y-2">
-                <Label htmlFor="condition">Condition *</Label>
+                <Label htmlFor="condition">{t("condition")} *</Label>
                 <Select
                   value={formData.condition}
                   onValueChange={(value) =>
@@ -217,14 +230,16 @@ export default function ItemAddPage() {
                   required
                 >
                   <SelectTrigger>
-                    <SelectValue placeholder="Select condition" />
+                    <SelectValue placeholder={t("selectCondition")} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="New">New</SelectItem>
-                    <SelectItem value="Like New">Like New</SelectItem>
-                    <SelectItem value="Good">Good</SelectItem>
-                    <SelectItem value="Fair">Fair</SelectItem>
-                    <SelectItem value="Poor">Poor</SelectItem>
+                    <SelectItem value="New">{t("conditions.new")}</SelectItem>
+                    <SelectItem value="Like New">
+                      {t("conditions.likeNew")}
+                    </SelectItem>
+                    <SelectItem value="Good">{t("conditions.good")}</SelectItem>
+                    <SelectItem value="Fair">{t("conditions.fair")}</SelectItem>
+                    <SelectItem value="Poor">{t("conditions.poor")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -232,7 +247,7 @@ export default function ItemAddPage() {
 
             {/* Location */}
             <div className="space-y-2">
-              <Label>Location *</Label>
+              <Label>{t("location")} *</Label>
 
               {/* Location Actions */}
               <div className="flex gap-2">
@@ -248,7 +263,7 @@ export default function ItemAddPage() {
                   ) : (
                     <Navigation className="size-4 mr-2" />
                   )}
-                  Detect My Location
+                  {t("detectLocation")}
                 </Button>
                 <Button
                   type="button"
@@ -274,7 +289,7 @@ export default function ItemAddPage() {
                   className="flex-1"
                 >
                   <MapPin />
-                  Select on Map
+                  {t("selectOnMap")}
                 </Button>
               </div>
 
@@ -288,8 +303,10 @@ export default function ItemAddPage() {
                         {location.address}
                       </p>
                       <p className="text-xs text-green-600 mt-1">
-                        Coordinates: {location.lat.toFixed(6)},{" "}
-                        {location.lng.toFixed(6)}
+                        {t("coordinates", {
+                          lat: location.lat.toFixed(6),
+                          lng: location.lng.toFixed(6),
+                        })}
                       </p>
                     </div>
                   </div>
@@ -297,19 +314,16 @@ export default function ItemAddPage() {
               )}
 
               {!location && (
-                <p className="text-sm text-gray-500">
-                  Click "Detect My Location" or "Select on Map" to set the item
-                  location
-                </p>
+                <p className="text-sm text-gray-500">{t("locationHelp")}</p>
               )}
             </div>
 
             {/* Description */}
             <div className="space-y-2">
-              <Label htmlFor="description">Description *</Label>
+              <Label htmlFor="description">{t("description")} *</Label>
               <Textarea
                 id="description"
-                placeholder="Describe your item in detail..."
+                placeholder={t("descriptionPlaceholder")}
                 value={formData.description}
                 onChange={(e) =>
                   setFormData({ ...formData, description: e.target.value })
@@ -321,10 +335,10 @@ export default function ItemAddPage() {
 
             {/* Features */}
             <div className="space-y-2">
-              <Label htmlFor="features">Features (one per line)</Label>
+              <Label htmlFor="features">{t("features")}</Label>
               <Textarea
                 id="features"
-                placeholder={`Feature 1\nFeature 2\nFeature 3`}
+                placeholder={t("featuresPlaceholder")}
                 value={formData.features}
                 onChange={(e) =>
                   setFormData({ ...formData, features: e.target.value })
@@ -336,14 +350,14 @@ export default function ItemAddPage() {
             {/* Actions */}
             <div className="flex gap-4">
               <Button type="submit" className="flex-1" disabled={!location}>
-                Publish Item
+                {t("publishItem")}
               </Button>
               <Button
                 type="button"
                 variant="outline"
                 onClick={() => navigate.push("/my-items")}
               >
-                Cancel
+                {t("cancel")}
               </Button>
             </div>
           </CardContent>
@@ -354,10 +368,8 @@ export default function ItemAddPage() {
       <Dialog open={showMapDialog} onOpenChange={setShowMapDialog}>
         <DialogContent className="max-w-4xl">
           <DialogHeader>
-            <DialogTitle>Select Item Location</DialogTitle>
-            <DialogDescription>
-              Click on the map to select the location of your item
-            </DialogDescription>
+            <DialogTitle>{t("selectItemLocation")}</DialogTitle>
+            <DialogDescription>{t("mapDescription")}</DialogDescription>
           </DialogHeader>
 
           <LocationMapPicker
@@ -372,10 +384,10 @@ export default function ItemAddPage() {
               disabled={!selectedPosition}
               className="flex-1"
             >
-              Confirm Location
+              {t("confirmLocation")}
             </Button>
             <Button variant="outline" onClick={() => setShowMapDialog(false)}>
-              Cancel
+              {t("cancel")}
             </Button>
           </div>
         </DialogContent>

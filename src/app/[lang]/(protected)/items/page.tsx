@@ -17,8 +17,10 @@ import { Filter, MapPin, Search, Star } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import items from "@/lib/items.json";
+import { useTranslations } from "next-intl";
 
 export default function ItemListPage() {
+  const t = useTranslations("items");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedCondition, setSelectedCondition] = useState("all");
@@ -125,8 +127,8 @@ export default function ItemListPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="mb-2">Browse Items</h1>
-        <p className="text-gray-600">Find the perfect item to rent</p>
+        <h1 className="mb-2">{t("title")}</h1>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       {/* Search & Quick Filters */}
@@ -137,7 +139,7 @@ export default function ItemListPage() {
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-gray-400" />
                 <Input
-                  placeholder="Search items..."
+                  placeholder={t("searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="pl-10"
@@ -148,10 +150,10 @@ export default function ItemListPage() {
                 onValueChange={setSelectedCategory}
               >
                 <SelectTrigger className="w-full sm:w-48">
-                  <SelectValue placeholder="Category" />
+                  <SelectValue placeholder={t("allCategories")} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="all">All Categories</SelectItem>
+                  <SelectItem value="all">{t("allCategories")}</SelectItem>
                   <SelectItem value="electronics">Electronics</SelectItem>
                   <SelectItem value="tools">Tools</SelectItem>
                   <SelectItem value="outdoor">Outdoor</SelectItem>
@@ -164,7 +166,7 @@ export default function ItemListPage() {
                 onClick={() => setShowFilters(!showFilters)}
               >
                 <Filter className="size-4 mr-2" />
-                {showFilters ? "Hide" : "More"} Filters
+                {showFilters ? t("hideFilters") : t("showFilters")}
               </Button>
             </div>
 
@@ -173,7 +175,7 @@ export default function ItemListPage() {
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <MapPin className="size-4 text-indigo-600" />
                 <span>
-                  Showing items within {distanceRange[0]}km of your location
+                  {t("showingItemsWithin", { distance: distanceRange[0] })}
                 </span>
               </div>
             )}
@@ -185,14 +187,15 @@ export default function ItemListPage() {
       {showFilters && (
         <Card>
           <CardContent className="p-6 space-y-6">
-            <h3>Advanced Filters</h3>
+            <h3>{t("advancedFilters")}</h3>
 
             {/* Distance Filter */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label>Distance Range</Label>
+                <Label>{t("distanceRange")}</Label>
                 <span className="text-sm text-gray-600">
-                  Up to {distanceRange[0]}km
+                  {t("upTo")} {distanceRange[0]}
+                  {t("km")}
                 </span>
               </div>
               <Slider
@@ -204,15 +207,15 @@ export default function ItemListPage() {
                 className="w-full"
               />
               <div className="flex justify-between text-xs text-gray-500">
-                <span>1km</span>
-                <span>10km</span>
+                <span>1{t("km")}</span>
+                <span>10{t("km")}</span>
               </div>
             </div>
 
             {/* Price Range */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <Label>Price Range</Label>
+                <Label>{t("priceRange")}</Label>
                 <span className="text-sm text-gray-600">
                   Tk{priceRange[0]} - Tk{priceRange[1]}
                 </span>

@@ -1,13 +1,15 @@
 "use client";
-import LanguageSwitcher from "@/components/shared/LanguageSwitcher";
 import { Button } from "@/components/ui/button";
 import { useAuth } from "@/context/AuthContext";
 import { useSidebar } from "@/context/SiderbarContext";
 import { Bell, LogOut, Menu, Package, X } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 
 export default function Header() {
+  const tCommon = useTranslations("common");
+  const tAuth = useTranslations("auth");
   const { isSidebarOpen, setIsSidebarOpen } = useSidebar();
   const { logout, email } = useAuth();
 
@@ -38,7 +40,7 @@ export default function Header() {
               className="min-w-52 max-w-52"
             />
             <div className="text-[0.70rem] text-grey-500 mt-1 font-bold">
-              Your trusted rental platform
+              {tCommon("tagline")}
             </div>
           </Link>
         </div>
@@ -59,12 +61,12 @@ export default function Header() {
             <>
               <Link href="/login">
                 <Button variant="default" size="sm">
-                  Login
+                  {tAuth("login")}
                 </Button>
               </Link>
               <Link href="/register">
                 <Button variant="outline" size="sm">
-                  Sign Up
+                  {tAuth("register")}
                 </Button>
               </Link>
             </>

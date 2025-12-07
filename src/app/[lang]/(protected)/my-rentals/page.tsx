@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ImageWithFallback } from "@/components/ui/ImageWithFallback";
 import { Calendar, User, MessageSquare } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 const asRenter = [
   {
@@ -105,6 +106,7 @@ const asOwner = [
 ];
 
 export default function MyRentalsPage() {
+  const t = useTranslations("myRentals");
   const [activeTab, setActiveTab] = useState("renter");
   const [renterList, setRenterList] = useState(asRenter);
   const [ownerList, setOwnerList] = useState(asOwner);
@@ -125,8 +127,8 @@ export default function MyRentalsPage() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="mb-2">My Rentals</h1>
-        <p className="text-gray-600">Track your rental activities</p>
+        <h1 className="mb-2">{t("title")}</h1>
+        <p className="text-gray-600">{t("subtitle")}</p>
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab}>
@@ -135,13 +137,13 @@ export default function MyRentalsPage() {
             value="renter"
             className="transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm"
           >
-            As Renter
+            {t("asRenter")}
           </TabsTrigger>
           <TabsTrigger
             value="owner"
             className="transition-all duration-200 data-[state=active]:bg-white data-[state=active]:shadow-sm"
           >
-            As Owner
+            {t("asOwner")}
           </TabsTrigger>
         </TabsList>
 
@@ -170,7 +172,7 @@ export default function MyRentalsPage() {
                         </Link>
                         <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
                           <User className="size-4" />
-                          Owner: {rental.owner}
+                          {t("owner")}: {rental.owner}
                         </p>
                       </div>
                       <Badge className={getStatusColor(rental.status)}>
@@ -185,7 +187,7 @@ export default function MyRentalsPage() {
                         </span>
                       </div>
                       <span className="text-indigo-600">
-                        Total: Tk {rental.total}
+                        {t("total")}: {t("currency")} {rental.total}
                       </span>
                       <span className="text-gray-500">
                         {(rental.status === "Active" ||
@@ -197,13 +199,13 @@ export default function MyRentalsPage() {
                     <div className="flex gap-2">
                       <Button size="sm" variant="outline" asChild>
                         <Link href={`/my-rentals/${rental.id}`}>
-                          View Details
+                          {t("viewDetails")}
                         </Link>
                       </Button>
                       <Button size="sm" variant="outline" asChild>
                         <Link href="/chat/1">
                           <MessageSquare className="size-4 mr-2" />
-                          Message
+                          {t("message")}
                         </Link>
                       </Button>
                       {rental.status === "Pending" && (
@@ -212,13 +214,13 @@ export default function MyRentalsPage() {
                             href="#"
                             style={{ pointerEvents: "none", opacity: 0.5 }}
                           >
-                            Payment
+                            {t("payment")}
                           </Link>
                         </Button>
                       )}
                       {rental.status === "Approved" && (
                         <Button size="sm" variant="default" asChild>
-                          <Link href="/payment">Payment</Link>
+                          <Link href="/payment">{t("payment")}</Link>
                         </Button>
                       )}
                     </div>
@@ -254,7 +256,7 @@ export default function MyRentalsPage() {
                         </Link>
                         <p className="text-sm text-gray-600 flex items-center gap-1 mt-1">
                           <User className="size-4" />
-                          Renter: {rental.renter}
+                          {t("renter")}: {rental.renter}
                         </p>
                       </div>
                       <Badge className={getStatusColor(rental.status)}>
@@ -269,7 +271,7 @@ export default function MyRentalsPage() {
                         </span>
                       </div>
                       <span className="text-indigo-600">
-                        Total: Tk {rental.total}
+                        {t("total")}: {t("currency")} {rental.total}
                       </span>
                       <span className="text-gray-500">
                         {(rental.status === "Active" ||
@@ -281,7 +283,7 @@ export default function MyRentalsPage() {
                     <div className="flex gap-2">
                       <Link href={`/rentals/${rental.id}`}>
                         <Button size="sm" variant="outline">
-                          View Details
+                          {t("viewDetails")}
                         </Button>
                       </Link>
                       {rental.status === "Pending" && (
@@ -303,21 +305,21 @@ export default function MyRentalsPage() {
                               );
                             }}
                           >
-                            Approve
+                            {t("approve")}
                           </Button>
                           <Button
                             size="sm"
                             variant="outline"
                             className="text-red-600"
                           >
-                            Decline
+                            {t("decline")}
                           </Button>
                         </>
                       )}
                       <Link href="/chat/1">
                         <Button size="sm" variant="outline">
                           <MessageSquare className="size-4 mr-2" />
-                          Message
+                          {t("message")}
                         </Button>
                       </Link>
                     </div>
