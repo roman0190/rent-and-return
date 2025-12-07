@@ -33,7 +33,7 @@ const SettingPage = () => {
   const handleLanguageChange = (newLang: string) => {
     const segments = pathname.split("/");
     segments[1] = newLang;
-    router.push(segments.join("/"));
+    window.location.href = segments.join("/");
   };
 
   return (
