@@ -216,10 +216,10 @@
       "cancel": "Cancel",
       "selectItemLocation": "Select Item Location",
       "mapDescription": "Click on the map to select the location of your item",
-      "confirmLocation": "Confirm Location"
+      "confirmLocation": "Confirm Location",
+      "selectLocationError": "Please select a location on the map",
+      "itemListedSuccess": "Item listed successfully!"
     },
-    "selectLocationError": "Please select a location on the map",
-    "itemListedSuccess": "Item listed successfully!",
     "noItemsFound": "No items found matching your criteria",
     "tryAdjustingFilters": "Try adjusting your filters or search query",
     "sortBy": "Sort by",

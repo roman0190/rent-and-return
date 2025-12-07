@@ -216,10 +216,10 @@
       "cancel": "रद्द करें",
       "selectItemLocation": "आइटम का स्थान चुनें",
       "mapDescription": "अपने आइटम का स्थान चुनने के लिए मानचित्र पर क्लिक करें",
-      "confirmLocation": "स्थान की पुष्टि करें"
+      "confirmLocation": "स्थान की पुष्टि करें",
+      "selectLocationError": "कृपया मानचित्र पर एक स्थान चुनें",
+      "itemListedSuccess": "आइटम सफलतापूर्वक सूचीबद्ध किया गया!"
     },
-    "selectLocationError": "कृपया मानचित्र पर एक स्थान चुनें",
-    "itemListedSuccess": "आइटम सफलतापूर्वक सूचीबद्ध किया गया!",
     "noItemsFound": "आपके मानदंड से मेल खाने वाला कोई आइटम नहीं मिला",
     "tryAdjustingFilters": "अपने फिल्टर या खोज क्वेरी को समायोजित करने का प्रयास करें",
     "sortBy": "क्रमबद्ध करें",
