@@ -35,11 +35,11 @@ export default function Header() {
             <Image
               src="/logo/main_logo.png"
               alt="Rent & Return Logo"
-              width={1080}
-              height={1080}
-              className="min-w-52 max-w-52"
+              width={208}
+              height={208}
+              className="w-52 h-10 object-contain"
             />
-            <div className="text-[0.70rem] text-grey-500 mt-1 font-bold">
+            <div className="text-[0.70rem] text-grey-500 font-bold">
               {tCommon("tagline")}
             </div>
           </Link>
