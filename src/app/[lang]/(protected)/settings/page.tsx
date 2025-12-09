@@ -168,7 +168,7 @@ const SettingPage = () => {
                   <SelectContent>
                     <SelectItem value="en">{t("languageEnglish")}</SelectItem>
                     <SelectItem value="bn">{t("languageBengali")}</SelectItem>
-                    {/* <SelectItem value="hi">{t("languageHindi")}</SelectItem> */}
+                    <SelectItem value="hi">{t("languageHindi")}</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
